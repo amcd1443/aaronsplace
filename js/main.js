@@ -7,13 +7,11 @@ $(function () {
 	})
 
 	client.getEntries().then(function (entries) {
-  		console.log("here are the entries ", entries.total + " placess");
-  		console.log("here they are:", entries);
   		var places = entries.items;
   		for (i = 0; i < places.length; i++) {
   			var place = places[i];
-  			var htmlToAdd = "<li>"+ place.fields.placename +"</li>";
-  			$("#manhattanplaces").append(htmlToAdd);
+  			var placeName = "<li>"+ place.fields.placename + place.fields.placedescription + "</li>";
+  			$("#manhattanplaces").append(placeName);
   			console.log("HTML should have been added");
   		}
 
@@ -23,3 +21,8 @@ $(function () {
 
 
 });
+
+
+// homework: continue making website
+// make it filter for place.fields.placelocation
+
