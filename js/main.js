@@ -12,7 +12,7 @@ $(function () {
   		var places = entries.items;
   		for (i = 0; i < places.length; i++) {
   			var place = places[i];
-  			var htmlToAdd = "<li>"+ place.fields.placename +"</li>";
+  			var htmlToAdd = "<li>"+ place.fields.placename + "</li>";
   			$("#manhattanplaces").append(htmlToAdd);
   			console.log("HTML should have been added");
   		}
