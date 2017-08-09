@@ -10,8 +10,13 @@ $(function () {
   		var places = entries.items;
   		for (i = 0; i < places.length; i++) {
   			var place = places[i];
+<<<<<<< HEAD
   			var placeName = "<li>"+ place.fields.placename + place.fields.placedescription + "</li>";
   			$("#manhattanplaces").append(placeName);
+=======
+  			var htmlToAdd = "<li>"+ place.fields.placename + "</li>";
+  			$("#manhattanplaces").append(htmlToAdd);
+>>>>>>> fc3c87659af4b74ea7e5765e1e705128957aef13
   			console.log("HTML should have been added");
   		}
 
