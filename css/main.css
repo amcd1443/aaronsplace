@@ -180,11 +180,10 @@ nav a:hover {
 
     nav a {
         float: left;
-        width: 10%;
         border: 1px solid green;
-        /*margin: 0 1.7%;*/
         padding: 25px 2%;
         margin-bottom: 0;
+        display: inline-block;
     }
 
     nav li:first-child a {
@@ -246,7 +245,8 @@ nav a:hover {
 
     .main aside {
         float: right;
-        width: 28%;
+        /*width: 28%;*/
+        display: inline-block;
         background-color: #0011ff;
     }
 }
