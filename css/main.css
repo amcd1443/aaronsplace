@@ -173,8 +173,8 @@ nav a:hover {
     nav a {
         float: left;
         border: 1px solid green;
-        padding: 25px 2%;
-        margin-bottom: 0;
+        padding: 10px 2%;
+        margin-top: 10px ;
         display: inline-block;
     }
 
@@ -222,7 +222,7 @@ nav a:hover {
 
     nav {
         float: right;
-        width: 38%;
+        width: 70%;
     }
 
 /* ============
@@ -237,7 +237,7 @@ nav a:hover {
 
     .main aside {
         float: right;
-        /*width: 28%;*/
+        width: 28%;
         display: inline-block;
         background-color: #0011ff;
     }
