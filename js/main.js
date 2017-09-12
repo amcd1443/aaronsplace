@@ -10,10 +10,12 @@ $(function () {
 
  	var arrayBoroughs = ["Manhattan", "Brooklyn", "east village", "flat iron gramercy", "noho"];
 
-	var allBoroughs = function() {
-		
-	}
- 	
+ 	var allBoroughs = function() {
+ 		for (i = 0; i < arrayBoroughs.length; i++) {
+ 			 var borough = arrayBoroughs[i];
+ 			 		}
+
+ 	};
 
 	var showDistrictPlaces = function(whichBurrow) {
 		currentDistrict = whichBurrow;
@@ -34,7 +36,7 @@ $(function () {
 	  $("#manhattanButton").click(function() {
 
 	    	showDistrictPlaces("Manhattan");
-
+	    	
 	  });
 
 	  $("#brooklynButton").click(function() {
@@ -49,59 +51,63 @@ $(function () {
 	  });
 
 	  $("#flatIronGramercyParkButton").click(function() {
-	    showDistrictPlaces("flat iron gramercy");
+	    
+	    	showDistrictPlaces("flat iron gramercy");
+
 	  });
 	  
 	  $("#nohoButton").click(function() {
-	  	showDistrictPlaces("noho");
+	  	
+	  		showDistrictPlaces("noho");
 	  });
 
 	  $("#allButton").click(function() {
-	  	showDistrictPlaces("noho");
+	  		
+
+	  		allBoroughs();
 	  });
 	};
 
+	
+			client.getEntries({skip:0,limit:10}).then(function (entries) {
+				var places = entries.items;
+				console.log(entries, "entries1")
+		  		for (i = 0; i < places.length; i++) {
+		  			var place = places[i];
+					var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " INITIAL LOADING " + "</li>";
+		  		  	$("#placeList").append(placeName);
+			  	}
+			    placesFromContentful = places;
+			    console.log(placesFromContentful, "PFC1");
+			});
+		
 
-allButton
+	var loadPageData = function() {
+			client.getEntries({skip:10, limit:10}).then(function(entries) {
+				var newLoadData = entries.items; 
+				var combinedData = placesFromContentful.concat(newLoadData);
+				console.log(combinedData, "combinedData");
+				placesFromContentful = combinedData;	
+				
+				showDistrictPlaces(currentDistrict);
+				
+			})
+		};	
 
-	client.getEntries({skip:0,limit:10}).then(function (entries) {
-		var places = entries.items;
-		console.log(entries, "entries1")
-  		for (i = 0; i < places.length; i++) {
-  			var place = places[i];
-			var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " initial loading " + "</li>";
-  		  	$("#placeList").append(placeName);
-	  	}
-	    placesFromContentful = places;
-	    console.log(placesFromContentful, "PFC1");
-	});
-
-
-var loadPageData = function() {
-		client.getEntries({skip:10, limit:10}).then(function(entries) {
-			var newLoadData = entries.items; 
-			var combinedData = placesFromContentful.concat(newLoadData);
-			console.log(combinedData, "combinedData");
-			placesFromContentful = combinedData;	
-			
-			showDistrictPlaces(currentDistrict);
-			
-		})
-	};	
-
-	assignClickHandlers();
+		assignClickHandlers();
 
 // Start of load on scrolling
 
 
 // below text locates the 'bottom' of the page
-$(window).scroll(function() {
-   if($(window).scrollTop() + $(window).height() == $(document).height()) {
-       loadPageData();
+	$(window).scroll(function() {
+   	if($(window).scrollTop() + $(window).height() == $(document).height()) {
+       	
+       	loadPageData();
 
-   }
+   		}
    
-});
+	});
 
 
 
@@ -109,7 +115,4 @@ $(window).scroll(function() {
 
 
 });
-// 3 steps
-// establish bottom
-// load more information
-// combine the newly loaded information to previous info
+
