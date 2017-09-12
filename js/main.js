@@ -20,7 +20,7 @@ $(function () {
 	    $("#placeList").empty();
 	    for (i = 0; i < placesFromContentful.length; i++) {
 	      var place = placesFromContentful[i];
-	      var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + "</li>";
+	      var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " POSTLOADSCROLLING " + "</li>";
 	      console.log(whichBurrow, "whichBurrow");
 	      console.log(place.fields.placelocation, "placefieldsplacelocation");
 	      if (place.fields.placelocation == whichBurrow) {
@@ -55,7 +55,27 @@ $(function () {
 	  $("#nohoButton").click(function() {
 	  	showDistrictPlaces("noho");
 	  });
+
+	  $("#allButton").click(function() {
+	  	showDistrictPlaces("noho");
+	  });
 	};
+
+
+allButton
+
+	client.getEntries({skip:0,limit:10}).then(function (entries) {
+		var places = entries.items;
+		console.log(entries, "entries1")
+  		for (i = 0; i < places.length; i++) {
+  			var place = places[i];
+			var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " initial loading " + "</li>";
+  		  	$("#placeList").append(placeName);
+	  	}
+	    placesFromContentful = places;
+	    console.log(placesFromContentful, "PFC1");
+	});
+
 
 var loadPageData = function() {
 		client.getEntries({skip:10, limit:10}).then(function(entries) {
@@ -71,10 +91,10 @@ var loadPageData = function() {
 
 	assignClickHandlers();
 
-// Start of Infinite scrolling
+// Start of load on scrolling
 
 
-
+// below text locates the 'bottom' of the page
 $(window).scroll(function() {
    if($(window).scrollTop() + $(window).height() == $(document).height()) {
        loadPageData();
@@ -85,20 +105,10 @@ $(window).scroll(function() {
 
 
 
-// End of Infinite scrolling
+// End of load on scrolling
 
-	client.getEntries({skip:0,limit:10}).then(function (entries) {
-		var places = entries.items;
-  		for (i = 0; i < places.length; i++) {
-  			var place = places[i];
-			var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + "</li>";
-  		  	$("#placeList").append(placeName);
-	  	}
-	    placesFromContentful = places;
-	});
+
 });
-
-
 // 3 steps
 // establish bottom
 // load more information
