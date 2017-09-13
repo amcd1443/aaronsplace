@@ -12,7 +12,7 @@ $(function () {
 
 	var allBoroughs = function() {
 		
-	}
+	};
  	
 
 	var showDistrictPlaces = function(whichBurrow) {
@@ -20,12 +20,12 @@ $(function () {
 	    $("#placeList").empty();
 	    for (i = 0; i < placesFromContentful.length; i++) {
 	      var place = placesFromContentful[i];
-	      var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + "</li>";
-	      console.log(whichBurrow);
-	      console.log(place.fields.placelocation);
+	      var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " this is the load on scroll " + "</li>";
+	      console.log(whichBurrow, "whichBurrow1");
+	      console.log(place.fields.placelocation, "placeFieldsLocation1");
 	      if (place.fields.placelocation == whichBurrow) {
-
 	        $("#placeList").append(placeName);
+
 	      }
 	    }
 	};
@@ -91,10 +91,11 @@ $(window).scroll(function() {
 		var places = entries.items;
   		for (i = 0; i < places.length; i++) {
   			var place = places[i];
-			var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + "</li>";
+			var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " this is the first 10 " + "</li>";
   		  	$("#placeList").append(placeName);
 	  	}
 	    placesFromContentful = places;
+	    console.log(entries,"entries")
 	});
 });
 
