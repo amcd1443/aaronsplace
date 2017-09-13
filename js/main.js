@@ -10,19 +10,34 @@ $(function () {
 
  	var arrayBoroughs = ["Manhattan", "Brooklyn", "east village", "flat iron gramercy", "noho"];
 
+<<<<<<< HEAD
 	var allBoroughs = function() {
 		
 	};
  	
+=======
+ 	var allBoroughs = function() {
+ 		for (i = 0; i < arrayBoroughs.length; i++) {
+ 			 var borough = arrayBoroughs[i];
+ 			 		}
+
+ 	};
+>>>>>>> ca53f8d8ed826beb4aaf1ec5b7fdd7fc53bc9d94
 
 	var showDistrictPlaces = function(whichBurrow) {
 		currentDistrict = whichBurrow;
 	    $("#placeList").empty();
 	    for (i = 0; i < placesFromContentful.length; i++) {
 	      var place = placesFromContentful[i];
+<<<<<<< HEAD
 	      var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " this is the load on scroll " + "</li>";
 	      console.log(whichBurrow, "whichBurrow1");
 	      console.log(place.fields.placelocation, "placeFieldsLocation1");
+=======
+	      var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " POSTLOADSCROLLING " + "</li>";
+	      console.log(whichBurrow, "whichBurrow");
+	      console.log(place.fields.placelocation, "placefieldsplacelocation");
+>>>>>>> ca53f8d8ed826beb4aaf1ec5b7fdd7fc53bc9d94
 	      if (place.fields.placelocation == whichBurrow) {
 	        $("#placeList").append(placeName);
 
@@ -34,7 +49,7 @@ $(function () {
 	  $("#manhattanButton").click(function() {
 
 	    	showDistrictPlaces("Manhattan");
-
+	    	
 	  });
 
 	  $("#brooklynButton").click(function() {
@@ -49,44 +64,69 @@ $(function () {
 	  });
 
 	  $("#flatIronGramercyParkButton").click(function() {
-	    showDistrictPlaces("flat iron gramercy");
+	    
+	    	showDistrictPlaces("flat iron gramercy");
+
 	  });
 	  
 	  $("#nohoButton").click(function() {
-	  	showDistrictPlaces("noho");
+	  	
+	  		showDistrictPlaces("noho");
+	  });
+
+	  $("#allButton").click(function() {
+	  		
+
+	  		allBoroughs();
 	  });
 	};
 
-var loadPageData = function() {
-		client.getEntries({skip:10, limit:10}).then(function(entries) {
-			var newLoadData = entries.items; 
-			var combinedData = placesFromContentful.concat(newLoadData);
-			console.log(combinedData, "hello");
-			placesFromContentful = combinedData;	
-			
-			showDistrictPlaces(currentDistrict);
-			
-		})
-	};	
+	
+			client.getEntries({skip:0,limit:10}).then(function (entries) {
+				var places = entries.items;
+				console.log(entries, "entries1")
+		  		for (i = 0; i < places.length; i++) {
+		  			var place = places[i];
+					var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " INITIAL LOADING " + "</li>";
+		  		  	$("#placeList").append(placeName);
+			  	}
+			    placesFromContentful = places;
+			    console.log(placesFromContentful, "PFC1");
+			});
+		
 
-	assignClickHandlers();
+	var loadPageData = function() {
+			client.getEntries({skip:10, limit:10}).then(function(entries) {
+				var newLoadData = entries.items; 
+				var combinedData = placesFromContentful.concat(newLoadData);
+				console.log(combinedData, "combinedData");
+				placesFromContentful = combinedData;	
+				
+				showDistrictPlaces(currentDistrict);
+				
+			})
+		};	
 
-// Start of Infinite scrolling
+		assignClickHandlers();
+
+// Start of load on scrolling
 
 
+// below text locates the 'bottom' of the page
+	$(window).scroll(function() {
+   	if($(window).scrollTop() + $(window).height() == $(document).height()) {
+       	
+       	loadPageData();
 
-$(window).scroll(function() {
-   if($(window).scrollTop() + $(window).height() == $(document).height()) {
-       loadPageData();
-
-   }
+   		}
    
-});
+	});
 
 
 
-// End of Infinite scrolling
+// End of load on scrolling
 
+<<<<<<< HEAD
 	client.getEntries({skip:0,limit:10}).then(function (entries) {
 		var places = entries.items;
   		for (i = 0; i < places.length; i++) {
@@ -98,9 +138,8 @@ $(window).scroll(function() {
 	    console.log(entries,"entries")
 	});
 });
+=======
+>>>>>>> ca53f8d8ed826beb4aaf1ec5b7fdd7fc53bc9d94
 
+});
 
-// 3 steps
-// establish bottom
-// load more information
-// combine the newly loaded information to previous info
