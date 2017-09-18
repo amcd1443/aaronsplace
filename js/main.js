@@ -65,12 +65,11 @@ $(function () {
 
 
 	var loadPageData = function(whichPage) {
-		
 		client.getEntries({
 			skip:(10 * whichPage), 
 			limit:10,
 			content_type: "place",
-			'fields.placelocation' : ""
+			'fields.placelocation' : currentDistrict
 		}).then(function(entries) {
 			var newLoadData = entries.items; 
 			var combinedData = placesFromContentful.concat(newLoadData);
@@ -95,17 +94,7 @@ $(function () {
 	assignClickHandlers();
 
 	loadPageData(pageCounter);
-	// client.getEntries({skip:0,limit:10}).then(function (entries) {
-	// 	var places = entries.items;
-	// 	console.log(entries, "entries1")
-	//   		for (i = 0; i < places.length; i++) {
-	//   			var place = places[i];
-	// 			var placeName = "<li>"+ place.fields.placename + " - " + place.fields.placedescription + " INITIAL LOADING " + "</li>";
-	//   		  	$("#placeList").append(placeName);
-	// 	  	}
-	//     placesFromContentful = places;
-	//     console.log(placesFromContentful, "PFC1");
-	// });
+
 
 
 });
